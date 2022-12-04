@@ -19,11 +19,7 @@ pub fn part_one(input: &str) -> Option<u32> {
                 let ranges = l.split(',').map(|elf| {
                     create_range(elf)
                 }).collect_vec();
-                if ranges[0].contains_fully(ranges[1].clone()) || ranges[1].contains_fully(ranges[0].clone()) {
-                    1
-                } else {
-                    0
-                }
+                u32::from(ranges[0].contains_fully(ranges[1].clone()) || ranges[1].contains_fully(ranges[0].clone()))
             })
             .sum::<u32>()
     )

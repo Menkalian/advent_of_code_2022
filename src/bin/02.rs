@@ -4,17 +4,17 @@ use itertools::Itertools;
 pub fn part_one(input: &str) -> Option<u32> {
     let mut sum = 0;
     for line in input.lines() {
-        let strat = line.split(" ").collect_vec();
+        let strat = line.split(' ').collect_vec();
         sum += 1;
-        sum += strat[1].chars().nth(0).unwrap() as u32 - 'X' as u32;
+        sum += strat[1].chars().next().unwrap() as u32 - 'X' as u32;
         sum += get_winning_score(strat);
     }
     Some(sum)
 }
 
 fn get_winning_score(strat: Vec<&str>) -> u32 {
-    let enemy = strat[0].chars().nth(0).unwrap() as u32 - 'A' as u32;
-    let you = strat[1].chars().nth(0).unwrap() as u32 - 'X' as u32;
+    let enemy = strat[0].chars().next().unwrap() as u32 - 'A' as u32;
+    let you = strat[1].chars().next().unwrap() as u32 - 'X' as u32;
 
     if enemy == you {
         return 3;
@@ -31,8 +31,8 @@ fn get_winning_score(strat: Vec<&str>) -> u32 {
 pub fn part_two(input: &str) -> Option<u32> {
     let mut sum = 0;
     for line in input.lines() {
-        let strat = line.split(" ").collect_vec();
-        sum += (strat[1].chars().nth(0).unwrap() as u32 - 'X' as u32) * 3;
+        let strat = line.split(' ').collect_vec();
+        sum += (strat[1].chars().next().unwrap() as u32 - 'X' as u32) * 3;
         sum += get_symbol_score(strat);
     }
     Some(sum)

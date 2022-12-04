@@ -16,7 +16,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     Some(
         input.lines()
             .map(|l| {
-                let ranges = l.split(",").map(|elf| {
+                let ranges = l.split(',').map(|elf| {
                     create_range(elf)
                 }).collect_vec();
                 if ranges[0].contains_fully(ranges[1].clone()) || ranges[1].contains_fully(ranges[0].clone()) {
@@ -30,7 +30,7 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 fn create_range(elf: &str) -> RangeInclusive<u32> {
-    let range_split = elf.split_once("-").unwrap();
+    let range_split = elf.split_once('-').unwrap();
     let start = range_split.0.parse::<u32>().unwrap();
     let end = range_split.1.parse::<u32>().unwrap();
     start..=end
@@ -40,7 +40,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     Some(
         input.lines()
             .map(|l| {
-                let ranges = l.split(",").map(|elf| {
+                let ranges = l.split(',').map(|elf| {
                     create_range(elf)
                 }).collect_vec();
                 let s1: HashSet<u32> = HashSet::from_iter(ranges[0].clone());

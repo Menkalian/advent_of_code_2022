@@ -25,8 +25,8 @@ fn check_visible(grid: &Vec<Vec<u32>>, x: usize, y: usize) -> bool {
     let value = grid[x][y];
 
     let mut vis = true;
-    for x1 in 0..x {
-        if grid[x1][y] >= value {
+    for item in grid.iter().take(x) {
+        if item[y] >= value {
             vis = false;
             break;
         }
@@ -36,8 +36,8 @@ fn check_visible(grid: &Vec<Vec<u32>>, x: usize, y: usize) -> bool {
     }
 
     vis = true;
-    for x1 in (x + 1)..grid.len() {
-        if grid[x1][y] >= value {
+    for item in grid.iter().skip(x + 1) {
+        if item[y] >= value {
             vis = false;
             break;
         }
@@ -64,7 +64,7 @@ fn check_visible(grid: &Vec<Vec<u32>>, x: usize, y: usize) -> bool {
             break;
         }
     }
-    return vis;
+    vis
 }
 
 fn calc_scenic(grid: &Vec<Vec<u32>>, x: usize, y: usize) -> u32 {
@@ -82,8 +82,8 @@ fn calc_scenic(grid: &Vec<Vec<u32>>, x: usize, y: usize) -> u32 {
     scenic *= vis_cnt;
 
     vis_cnt = 0;
-    for x1 in (x + 1)..grid.len() {
-        let cu_val = grid[x1][y];
+    for item in grid.iter().skip(x + 1) {
+        let cu_val = item[y];
         vis_cnt += 1;
         if cu_val >= value {
             break;
@@ -111,7 +111,7 @@ fn calc_scenic(grid: &Vec<Vec<u32>>, x: usize, y: usize) -> u32 {
     }
     scenic *= vis_cnt;
 
-    return scenic;
+    scenic
 }
 
 pub fn part_two(input: &str) -> Option<u32> {

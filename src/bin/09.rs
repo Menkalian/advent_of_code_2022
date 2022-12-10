@@ -70,7 +70,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     let mut rope = (0..10).map(|_| Pos { x: 0, y: 0 }).collect_vec();
     let mut tail_dump = HashSet::new();
     let mut tail_pos = HashSet::new();
-    tail_pos.insert(rope.last().unwrap().clone());
+    tail_pos.insert(*rope.last().unwrap());
     for line in input.lines() {
         let instr = line.split_once(' ').unwrap();
         for _ in 0..(instr.1.parse::<u32>().unwrap()) {

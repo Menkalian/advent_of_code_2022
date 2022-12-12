@@ -35,8 +35,9 @@ fn calc_cap(input: &str) -> u128 {
     factor
 }
 
+type Monkey = (Vec<u128>, Box<dyn Fn(u128) -> u128>, Box<dyn Fn(u128) -> usize>);
 
-fn parse_monke(input: String) -> (Vec<u128>, Box<dyn Fn(u128) -> u128>, Box<dyn Fn(u128) -> usize>) {
+fn parse_monke(input: String) -> Monkey {
     let monke_regex = Regex::new(
         "Monkey \\d:\\n\
         \\s+Starting items: (\\d+(, \\d+)*)\\n\
@@ -84,7 +85,7 @@ fn parse_monke(input: String) -> (Vec<u128>, Box<dyn Fn(u128) -> u128>, Box<dyn 
     )
 }
 
-fn create_monke(input: &str) -> Vec<(Vec<u128>, Box<dyn Fn(u128) -> u128>, Box<dyn Fn(u128) -> usize>)> {
+fn create_monke(input: &str) -> Vec<Monkey> {
     input
         .lines()
         .chunks(7)
